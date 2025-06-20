@@ -6436,7 +6436,7 @@ function parse(src, reviver, options) {
 function evaluateYaml(yamlString) {
   return parse(yamlString);
 }
-const version = "0.1.0";
+const version = "0.1.0__BUGFIX_layout-cards_droans";
 let isTemplateLoaded = null;
 let remoteTemplates = {};
 const thrower = (text) => {
@@ -6522,14 +6522,13 @@ const thrower = (text) => {
       }
     }
     connectedCallback() {
-      this._isConnected = true;
-      this.queueUpdate("config");
-      this.queueUpdate("editMode");
-      this.queueUpdate("hass");
+      if (!this._isConnected) {
+        this._isConnected = true;
+      }
     }
-    disconnectedCallback() {
-      this._isConnected = false;
-    }
+    // disconnectedCallback() {
+    //   this._isConnected = false;
+    // }
     get editMode() {
       return this._editMode;
     }
